@@ -1,19 +1,31 @@
 module "rg" {
-  source = "registry.terraform.io/libre-devops/rg/azurerm"
+  source = "libre-devops/rg/azurerm"
 
-  rg_name  = "rg-${var.short}-${var.loc}-${var.env}-${random_string.entropy.result}"
+  rg_name  = "rg-${var.short}-${var.loc}-${var.env}-01"
   location = local.location
   tags     = local.tags
-
-  #  lock_level = "CanNotDelete" // Do not set this value to skip lock
 }
 
-module "dev" {
+module "azure_monitor_action_groups" {
   source = "../../"
 
-  rg_name  = module.rg.rg_name
-  location = module.rg.rg_location
-  tags     = module.rg.rg_tags
+  action_groups = [
+    {
+      resource_group_name = module.rg.rg_name
+      location            = module.rg.rg_location
+      tags                = module.rg.rg_tags
 
-  name = "${var.name}-${random_string.entropy.result}"
+      name       = "ag-${var.short}-${var.loc}-${var.env}-01"
+      short_name = "${var.short}email"
+
+
+      email_receiver = [
+        {
+          name                    = "alert-email-${var.short}-${var.loc}-${var.env}-01"
+          email_address           = "example@libredevops.org"
+          use_common_alert_schema = true
+        }
+      ]
+    }
+  ]
 }
