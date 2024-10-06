@@ -16,25 +16,25 @@ variable "action_groups" {
 
     automation_runbook_receiver = optional(list(object({
       name                    = string
-      automation_account_id    = string
+      automation_account_id   = string
       runbook_name            = string
-      webhook_resource_id      = string
-      is_global_runbook        = bool
+      webhook_resource_id     = string
+      is_global_runbook       = bool
       service_uri             = string
       use_common_alert_schema = optional(bool)
     })))
 
     azure_app_push_receiver = optional(list(object({
-      name           = string
-      email_address  = string
+      name          = string
+      email_address = string
     })))
 
     azure_function_receiver = optional(list(object({
-      name                    = string
+      name                     = string
       function_app_resource_id = string
-      function_name           = string
-      http_trigger_url        = string
-      use_common_alert_schema = optional(bool)
+      function_name            = string
+      http_trigger_url         = string
+      use_common_alert_schema  = optional(bool)
     })))
 
     email_receiver = optional(list(object({
@@ -53,11 +53,11 @@ variable "action_groups" {
     })))
 
     itsm_receiver = optional(list(object({
-      name                = string
-      workspace_id        = string
-      connection_id       = string
+      name                 = string
+      workspace_id         = string
+      connection_id        = string
       ticket_configuration = string
-      region              = string
+      region               = string
     })))
 
     logic_app_receiver = optional(list(object({
@@ -68,15 +68,15 @@ variable "action_groups" {
     })))
 
     sms_receiver = optional(list(object({
-      name           = string
-      country_code   = string
-      phone_number   = string
+      name         = string
+      country_code = string
+      phone_number = string
     })))
 
     voice_receiver = optional(list(object({
-      name           = string
-      country_code   = string
-      phone_number   = string
+      name         = string
+      country_code = string
+      phone_number = string
     })))
 
     webhook_receiver = optional(list(object({

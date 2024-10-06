@@ -1,5 +1,5 @@
 resource "azurerm_monitor_action_group" "this" {
-  for_each            = { for group in var.action_groups : group.name => group }
+  for_each = { for group in var.action_groups : group.name => group }
 
   name                = each.value.name
   resource_group_name = each.value.resource_group_name
@@ -19,10 +19,10 @@ resource "azurerm_monitor_action_group" "this" {
     for_each = each.value.automation_runbook_receiver != null ? each.value.automation_runbook_receiver : []
     content {
       name                    = automation_runbook_receiver.value.name
-      automation_account_id    = automation_runbook_receiver.value.automation_account_id
+      automation_account_id   = automation_runbook_receiver.value.automation_account_id
       runbook_name            = automation_runbook_receiver.value.runbook_name
-      webhook_resource_id      = automation_runbook_receiver.value.webhook_resource_id
-      is_global_runbook        = automation_runbook_receiver.value.is_global_runbook
+      webhook_resource_id     = automation_runbook_receiver.value.webhook_resource_id
+      is_global_runbook       = automation_runbook_receiver.value.is_global_runbook
       service_uri             = automation_runbook_receiver.value.service_uri
       use_common_alert_schema = automation_runbook_receiver.value.use_common_alert_schema
     }
@@ -39,11 +39,11 @@ resource "azurerm_monitor_action_group" "this" {
   dynamic "azure_function_receiver" {
     for_each = each.value.azure_function_receiver != null ? each.value.azure_function_receiver : []
     content {
-      name                    = azure_function_receiver.value.name
+      name                     = azure_function_receiver.value.name
       function_app_resource_id = azure_function_receiver.value.function_app_resource_id
-      function_name           = azure_function_receiver.value.function_name
-      http_trigger_url        = azure_function_receiver.value.http_trigger_url
-      use_common_alert_schema = azure_function_receiver.value.use_common_alert_schema
+      function_name            = azure_function_receiver.value.function_name
+      http_trigger_url         = azure_function_receiver.value.http_trigger_url
+      use_common_alert_schema  = azure_function_receiver.value.use_common_alert_schema
     }
   }
 
@@ -71,11 +71,11 @@ resource "azurerm_monitor_action_group" "this" {
   dynamic "itsm_receiver" {
     for_each = each.value.itsm_receiver != null ? each.value.itsm_receiver : []
     content {
-      name                = itsm_receiver.value.name
-      workspace_id        = itsm_receiver.value.workspace_id
-      connection_id       = itsm_receiver.value.connection_id
+      name                 = itsm_receiver.value.name
+      workspace_id         = itsm_receiver.value.workspace_id
+      connection_id        = itsm_receiver.value.connection_id
       ticket_configuration = itsm_receiver.value.ticket_configuration
-      region              = itsm_receiver.value.region
+      region               = itsm_receiver.value.region
     }
   }
 
@@ -92,18 +92,18 @@ resource "azurerm_monitor_action_group" "this" {
   dynamic "sms_receiver" {
     for_each = each.value.sms_receiver != null ? each.value.sms_receiver : []
     content {
-      name          = sms_receiver.value.name
-      country_code  = sms_receiver.value.country_code
-      phone_number  = sms_receiver.value.phone_number
+      name         = sms_receiver.value.name
+      country_code = sms_receiver.value.country_code
+      phone_number = sms_receiver.value.phone_number
     }
   }
 
   dynamic "voice_receiver" {
     for_each = each.value.voice_receiver != null ? each.value.voice_receiver : []
     content {
-      name          = voice_receiver.value.name
-      country_code  = voice_receiver.value.country_code
-      phone_number  = voice_receiver.value.phone_number
+      name         = voice_receiver.value.name
+      country_code = voice_receiver.value.country_code
+      phone_number = voice_receiver.value.phone_number
     }
   }
 
