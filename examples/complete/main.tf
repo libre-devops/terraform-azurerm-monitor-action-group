@@ -23,9 +23,8 @@ module "rg" {
   resource_groups = [{ name = local.rg_name, location = local.location, tags = module.tags.tags }]
 }
 
-# Complete call: the appliable receiver surface. The paging group fans out to email, SMS and voice
-# (Ofcom-reserved test numbers, nothing rings), a webhook, the Monitoring Reader ARM role, and the
-# Azure mobile app; the second group shows enabled = false, silencing without unwiring (its alerts
+# Complete call: the appliable receiver surface. The paging group fans out to email, a webhook,
+# the Monitoring Reader ARM role, and the Azure mobile app; the second group shows enabled = false, silencing without unwiring (its alerts
 # park until re-enabled). Receivers needing live backing resources (event hub, function, logic
 # app, runbook, ITSM) are covered by the mocked tests; the logic app receiver gets its live outing
 # in the logic-app-workflow module's alert-storm example.
@@ -44,14 +43,9 @@ module "action_group" {
         { name = "Notify_platform_lead_legacy_schema", email_address = "lead@example.com", use_common_alert_schema = false },
       ]
 
-      sms_receivers = [
-        { name = "Text_oncall_phone", country_code = "44", phone_number = "7700900123" }
-      ]
-
-      voice_receivers = [
-        { name = "Call_oncall_phone", country_code = "44", phone_number = "7700900124" }
-      ]
-
+      # SMS and voice receivers are mocked-test-only: Azure validates numbers against real
+      # numbering plans (PhoneNumberIsNotValid for Ofcom's reserved drama range, proven live), so
+      # a runnable example would need a real phone number.
       webhook_receivers = [
         { name = "Post_to_incident_bridge_webhook", service_uri = "https://example.com/hooks/incident-bridge" }
       ]

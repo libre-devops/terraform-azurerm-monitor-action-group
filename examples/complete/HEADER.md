@@ -15,10 +15,11 @@
 # Complete example
 
 The appliable receiver surface: a paging group fanning out to email (including one legacy-schema
-opt-out, which the check surfaces), SMS and voice on Ofcom-reserved test numbers, a webhook, the
-Monitoring Reader ARM role, and the Azure mobile app, plus a second group showing enabled = false
+opt-out, which the check surfaces), a webhook, the Monitoring Reader ARM role, and the Azure
+mobile app, plus a second group showing enabled = false
 (silenced without unwiring). Receivers needing live backing resources (event hub, function, logic
-app, runbook, ITSM) are covered by the mocked tests. The environment comes from the Terraform
+app, runbook, ITSM) and phone receivers (Azure validates against real numbering plans) are
+covered by the mocked tests. The environment comes from the Terraform
 workspace (`terraform.workspace`), not a variable. Run it with `just e2e complete`, which applies
 the stack then always destroys it.
 

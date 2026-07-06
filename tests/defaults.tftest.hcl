@@ -23,6 +23,14 @@ variables {
         }
       ]
 
+      sms_receivers = [
+        { name = "Text_oncall_phone", country_code = "44", phone_number = "7700900123" }
+      ]
+
+      voice_receivers = [
+        { name = "Call_oncall_phone", country_code = "44", phone_number = "7700900124" }
+      ]
+
       logic_app_receivers = [
         {
           name         = "Run_alert_storm_playbook"
