@@ -1,24 +1,34 @@
-output "action_group_id" {
-  description = "The ID of the Azure Monitor Action Group"
-  value       = { for name, ag in azurerm_monitor_action_group.this : name => ag.id }
+output "ids" {
+  description = "Map of action group name to its resource id."
+  value       = { for k, v in azurerm_monitor_action_group.this : k => v.id }
 }
 
-output "action_group_location" {
-  description = "The location of the Azure Monitor Action Group"
-  value       = { for name, ag in azurerm_monitor_action_group.this : name => ag.location }
+output "ids_zipmap" {
+  description = "Map of action group name to a { name, id } object, for passing where both are needed together."
+  value       = { for k, v in azurerm_monitor_action_group.this : k => { name = v.name, id = v.id } }
 }
 
-output "action_group_name" {
-  description = "The name of the Azure Monitor Action Group"
-  value       = { for name, ag in azurerm_monitor_action_group.this : name => ag.name }
+output "names" {
+  description = "The action group names."
+  value       = keys(azurerm_monitor_action_group.this)
 }
 
-output "action_group_resource_group_name" {
-  description = "The resource group name where the Azure Monitor Action Group is located"
-  value       = { for name, ag in azurerm_monitor_action_group.this : name => ag.resource_group_name }
+output "resource_group_name" {
+  description = "Resource group name parsed from resource_group_id."
+  value       = local.rg_name
 }
 
-output "action_group_tags" {
-  description = "The tags of the Azure Monitor Action Group"
-  value       = { for name, ag in azurerm_monitor_action_group.this : name => ag.tags }
+output "short_names" {
+  description = "Map of action group name to its short name."
+  value       = { for k, v in azurerm_monitor_action_group.this : k => v.short_name }
+}
+
+output "subscription_id" {
+  description = "Subscription id parsed from resource_group_id."
+  value       = local.rg.subscription_id
+}
+
+output "tags" {
+  description = "The tags applied to the action groups."
+  value       = var.tags
 }
