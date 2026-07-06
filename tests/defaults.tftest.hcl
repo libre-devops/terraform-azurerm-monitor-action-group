@@ -12,28 +12,28 @@ variables {
       short_name = "platform"
 
       email_receivers = [
-        { name = "Notify_platform_team_mailbox", email_address = "platform@example.com" }
+        { name = "Notify the platform team mailbox", email_address = "platform@example.com" }
       ]
 
       webhook_receivers = [
         {
-          name        = "Post_to_bridge_with_aad"
+          name        = "Post to the bridge with AAD auth"
           service_uri = "https://example.com/hooks/bridge"
           aad_auth    = { object_id = "11111111-1111-1111-1111-111111111111" }
         }
       ]
 
       sms_receivers = [
-        { name = "Text_oncall_phone", country_code = "44", phone_number = "7700900123" }
+        { name = "Text the on call phone", country_code = "44", phone_number = "7700900123" }
       ]
 
       voice_receivers = [
-        { name = "Call_oncall_phone", country_code = "44", phone_number = "7700900124" }
+        { name = "Call the on call phone", country_code = "44", phone_number = "7700900124" }
       ]
 
       logic_app_receivers = [
         {
-          name         = "Run_alert_storm_playbook"
+          name         = "Run the alert storm playbook"
           resource_id  = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-ldo-uks-tst-01/providers/Microsoft.Logic/workflows/logic-ldo-uks-tst-01"
           callback_url = "https://prod-00.uksouth.logic.azure.com/workflows/x/triggers/y/paths/invoke"
         }
@@ -90,7 +90,7 @@ run "rejects_long_short_name" {
     action_groups = {
       "ag-ldo-uks-tst-01" = {
         short_name      = "much-too-long-short-name"
-        email_receivers = [{ name = "Notify_team", email_address = "team@example.com" }]
+        email_receivers = [{ name = "Notify the team", email_address = "team@example.com" }]
       }
     }
   }
@@ -106,7 +106,7 @@ run "rejects_bad_country_code" {
     action_groups = {
       "ag-ldo-uks-tst-01" = {
         short_name    = "platform"
-        sms_receivers = [{ name = "Text_oncall", country_code = "+44", phone_number = "7700900123" }]
+        sms_receivers = [{ name = "Text the on call phone", country_code = "+44", phone_number = "7700900123" }]
       }
     }
   }
@@ -123,7 +123,7 @@ run "rejects_role_resource_id" {
       "ag-ldo-uks-tst-01" = {
         short_name = "platform"
         arm_role_receivers = [{
-          name    = "Notify_monitoring_readers"
+          name    = "Notify the monitoring readers"
           role_id = "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Authorization/roleDefinitions/43d0d8ad-25c7-4714-9337-8ba259a9fe05"
         }]
       }

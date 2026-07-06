@@ -39,24 +39,24 @@ module "action_group" {
       short_name = "page-oncall"
 
       email_receivers = [
-        { name = "Notify_oncall_mailbox", email_address = "oncall@example.com" },
-        { name = "Notify_platform_lead_legacy_schema", email_address = "lead@example.com", use_common_alert_schema = false },
+        { name = "Notify the on call mailbox", email_address = "oncall@example.com" },
+        { name = "Notify the platform lead on the legacy schema", email_address = "lead@example.com", use_common_alert_schema = false },
       ]
 
       # SMS and voice receivers are mocked-test-only: Azure validates numbers against real
       # numbering plans (PhoneNumberIsNotValid for Ofcom's reserved drama range, proven live), so
       # a runnable example would need a real phone number.
       webhook_receivers = [
-        { name = "Post_to_incident_bridge_webhook", service_uri = "https://example.com/hooks/incident-bridge" }
+        { name = "Post to the incident bridge webhook", service_uri = "https://example.com/hooks/incident-bridge" }
       ]
 
       arm_role_receivers = [
         # Monitoring Reader, GUID verified with: az role definition list --name "Monitoring Reader"
-        { name = "Notify_monitoring_readers", role_id = "43d0d8ad-25c7-4714-9337-8ba259a9fe05" }
+        { name = "Notify the monitoring readers", role_id = "43d0d8ad-25c7-4714-9337-8ba259a9fe05" }
       ]
 
       azure_app_push_receivers = [
-        { name = "Push_to_azure_mobile_app", email_address = "oncall@example.com" }
+        { name = "Push to the Azure mobile app", email_address = "oncall@example.com" }
       ]
     }
 
@@ -65,7 +65,7 @@ module "action_group" {
       enabled    = false
 
       email_receivers = [
-        { name = "Notify_platform_team_mailbox", email_address = "platform@example.com" }
+        { name = "Notify the platform team mailbox", email_address = "platform@example.com" }
       ]
     }
   }

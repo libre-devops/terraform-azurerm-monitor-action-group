@@ -56,12 +56,12 @@ module "action_group" {
       short_name = "page-oncall"
 
       email_receivers = [
-        { name = "Notify_oncall_mailbox", email_address = "oncall@example.com" }
+        { name = "Notify the on call mailbox", email_address = "oncall@example.com" }
       ]
 
       logic_app_receivers = [
         {
-          name         = "Run_alert_storm_playbook"
+          name         = "Run the alert storm playbook"
           resource_id  = module.logic_app_workflow.ids["logic-ldo-uks-prd-001"]
           callback_url = azurerm_logic_app_trigger_http_request.storm.callback_url
         }

@@ -33,7 +33,7 @@ module "action_group" {
       short_name = "platform"
 
       email_receivers = [
-        { name = "Notify_platform_team_mailbox", email_address = "platform@example.com" }
+        { name = "Notify the platform team mailbox", email_address = "platform@example.com" }
       ]
     }
   }
